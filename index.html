@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>나만의 날씨예보</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="theme-night">
+  <div class="wrap">
+    <header class="header">
+      <div class="brand">
+        <div class="logo">☀️</div>
+        <div>
+          <h1 class="title">나만의 날씨예보</h1>
+          <p class="subtitle">HTML · CSS · JavaScript · OpenWeather API</p>
+        </div>
+      </div>
+
+      <div class="searchbar">
+        <input
+          id="cityInput"
+          type="text"
+          placeholder="도시를 입력하세요 (예: 서울, 부산, Tokyo, New York)"
+        />
+        <button id="searchBtn" class="btn-primary">검색</button>
+        <button id="unitToggle" class="btn-outline">°C / °F</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="errorBox" class="error" style="display:none;"></section>
+
+      <section class="recent" id="recentBox"></section>
+
+      <section class="cards">
+        <!-- 현재 날씨 카드 -->
+        <article class="card">
+          <h2 class="card-title">현재 날씨</h2>
+          <div class="current">
+            <img id="icon" alt="날씨 아이콘" width="80" height="80" />
+            <div>
+              <p id="temp" class="temp">--°</p>
+              <p id="desc" class="muted">상태</p>
+              <p id="place" class="muted">도시, 국가</p>
+            </div>
+          </div>
+
+          <div class="kvs">
+            <div class="pill">습도: <span id="humidity">--</span>%</div>
+            <div class="pill">
+              풍속:
+              <span id="wind">--</span>
+              <span id="windUnit">m/s</span>
+            </div>
+          </div>
+
+          <p id="outfitTip" class="muted outfit"></p>
+        </article>
+
+        <!-- 3~5일 예보 카드 -->
+        <article class="card card-wide">
+          <h2 class="card-title">3~5일 예보</h2>
+          <div id="forecastGrid" class="forecast-grid"></div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      데이터: OpenWeatherMap · 아이콘 © OpenWeather · 제작: 본인 이름
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
