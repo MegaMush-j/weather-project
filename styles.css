@@ -162,20 +162,32 @@ button:hover {
 }
 
 /* 예보 카드 */
+/* 예보 카드 */
 .forecast-grid {
-  display: flex;
+  /* 기존: display: flex; overflow-x: auto; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 10px;
-  overflow-x: auto;
+  /* 가로 스크롤 필요 없으면 아래 줄도 제거하거나 주석 처리 */
+  /* overflow-x: auto;  <-- 이 줄은 지우거나 빼도 됨 */
 }
 
 .forecast-item {
-  min-width: 140px;
+  /* 기존 min-width 제거 */
+  /* min-width: 140px;  <-- 이 줄 삭제 */
   padding: 10px;
   border-radius: 12px;
   background: #020617;
   border: 1px solid #1f2937;
   text-align: center;
 }
+.quote {
+  text-align: center;
+  font-size: 14px;
+  color: var(--muted);
+  margin: 12px 0 4px;
+}
+
 
 .forecast-date {
   font-size: 13px;
@@ -266,4 +278,9 @@ body.theme-night {
     justify-content: space-between;
     align-items: center;
   }
+}
+
+.sun-info {
+  font-size: 13px;
+  margin-top: 6px;
 }

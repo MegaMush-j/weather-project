@@ -188,7 +188,20 @@ function displayCurrent(data, geo) {
 
   const tip = getOutfitTip(data.main.temp, weather.id, data.wind.speed || 0);
   $("#outfitTip").textContent = tip;
+
+  // ⭐⭐ 여기부터 추가됨 ⭐⭐
+
+  // 일출·일몰 계산
+  const sunrise = new Date((data.sys.sunrise + data.timezone) * 1000);
+  const sunset  = new Date((data.sys.sunset  + data.timezone) * 1000);
+
+  const fmtTime = (d) =>
+    d.toLocaleTimeString("ko-KR", { hour: "2-digit", minute: "2-digit" });
+
+  $("#sunInfo").textContent =
+    `일출 ${fmtTime(sunrise)} · 일몰 ${fmtTime(sunset)}`;
 }
+
 
 function displayForecast(forecast) {
   const grid = $("#forecastGrid");
@@ -223,7 +236,7 @@ function displayForecast(forecast) {
         })}
       </div>
       <img src="https://openweathermap.org/img/wn/${w.icon}@2x.png"
-           width="60" height="60" alt="${w.description}" />
+            width="60" height="60" alt="${w.description}" />
       <div class="forecast-temp">${fmtTemp(item.main.temp)}</div>
       <div class="muted">${w.description}</div>
     `;
@@ -295,9 +308,25 @@ $("#unitToggle").addEventListener("click", () => {
 // ----------------------
 function init() {
   renderRecent();
+  renderQuote();  // ⭐ 랜덤 명언 표시
   const first = loadRecent()[0] || "서울";
   $("#cityInput").value = first;
   search(first);
+}
+const quotes = [
+  "하늘은 스스로 돕는 자를 돕는다.",
+  "오늘의 날씨처럼 마음도 맑아지길.",
+  "작은 변화가 내일을 바꾼다.",
+  "포기하지 마. 기적은 생각보다 가까워.",
+  "느리더라도 꾸준히 가면 결국 닿는다.",
+  "행복은 준비된 마음에서 시작된다.",
+  "지금 이 순간도 충분히 아름답다."
+];
+
+function renderQuote() {
+  const box = document.getElementById("quoteBox");
+  const pick = quotes[Math.floor(Math.random() * quotes.length)];
+  box.textContent = pick;
 }
 
 init();
